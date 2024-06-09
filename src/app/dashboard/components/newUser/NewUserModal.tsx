@@ -48,6 +48,9 @@ export default function NewUserModal({}: {}) {
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
+    if (count === 0) {
+      return;
+    }
     toast.success(
       "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial.",
       {
