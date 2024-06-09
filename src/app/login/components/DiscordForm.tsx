@@ -25,18 +25,6 @@ export default function DiscordForm() {
         <DiscordLogoIcon />
         Continue with Discord
       </Button>
-      <Divider />
-      <text className="text-center">
-        Before you sign in, please authorize the bot to send you direct
-        messages, by clicking{" "}
-        <NextUILink
-          href="javascript:window.open('https://discord.com/oauth2/authorize?client_id=1238871856896016444','mypopuptitle','width=600,height=400')"
-          as={Link}
-        >
-          here
-        </NextUILink>
-        .
-      </text>
     </form>
   );
 }

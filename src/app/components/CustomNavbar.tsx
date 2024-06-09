@@ -20,6 +20,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
+  DropdownSection,
 } from "@nextui-org/react";
 import { User } from "@supabase/supabase-js";
 import { webcrypto } from "crypto";
@@ -106,12 +107,32 @@ export default function CustomNavbar() {
                     variant="flat"
                     disabledKeys={["profile"]}
                   >
-                    <DropdownItem key="profile" className="h-14 gap-2">
-                      <p className="font-semibold">Signed in as:</p>
-                      <p className="font-semibold">
-                        {user.identities[0].identity_data.full_name}
-                      </p>
-                    </DropdownItem>
+                    <DropdownSection>
+                      <DropdownItem key="profile" className="h-14 gap-2">
+                        <p className="font-semibold">Signed in as:</p>
+                        <p className="font-semibold">
+                          {user.identities[0].identity_data.full_name}
+                        </p>
+                      </DropdownItem>
+                    </DropdownSection>
+                    <DropdownSection>
+                      <DropdownItem
+                        key="botconnect"
+                        as={NextUILink}
+                        href="javascript:window.open('https://discord.com/oauth2/authorize?client_id=1238871856896016444%27,%27Discord%27,%27width=600,height=400%27)"
+                      >
+                        Connect Bot Again
+                      </DropdownItem>
+                      <DropdownItem
+                        key="tutorial"
+                        onPress={() => {
+                          localStorage.setItem("returningUser", "false");
+                          window.location.reload();
+                        }}
+                      >
+                        Redo Tutorial
+                      </DropdownItem>
+                    </DropdownSection>
                     {/* <DropdownItem key="settings">My Settings</DropdownItem>
                   <DropdownItem key="team_settings">Team Settings</DropdownItem>
                   <DropdownItem key="analytics">Analytics</DropdownItem>
