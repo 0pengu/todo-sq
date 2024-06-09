@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Card,
@@ -25,7 +27,8 @@ import Latex from "react-latex-next";
 import { now, getLocalTimeZone } from "@internationalized/date";
 import moment from "moment";
 import { DiscordLogoIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function NewUserModal({}: {}) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
@@ -42,6 +45,14 @@ export default function NewUserModal({}: {}) {
   };
 
   const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    if (disabledForNow === false) {
+      toast.success(
+        "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial."
+      );
+    }
+  }, [disabledForNow]);
 
   return (
     <Modal
@@ -87,11 +98,7 @@ export default function NewUserModal({}: {}) {
                       <p className="text-md">
                         Created {formatTime(firstTodo.created_at || "")}
                       </p>
-                      <Tooltip
-                        content={moment(firstTodo.due_date)
-                          .local()
-                          .format("MM/DD/YYYY h:mm a z")}
-                      >
+                      <Tooltip content={"Date spoofed to be 5 days ago"}>
                         <p className="text-small text-default-500">
                           Due date spoofed to be 5 days ago
                         </p>
@@ -107,19 +114,10 @@ export default function NewUserModal({}: {}) {
                 <input name="todoId" type="hidden" value={firstTodo.id} />
                 <text className="text-md">
                   Now that you have connected the bot to your Discord account,
-                  {"let's"} add a fake todo to test if the bot is able to
-                  contact you.
+                  {" let's"} add a fake todo to test if the bot is able to
+                  contact you. Go ahead and click the button below to add the
+                  todo.
                 </text>
-                {!!!disabledForNow && (
-                  <>
-                    <Divider />
-                    <text className="text-md">
-                      You should have received a message from the bot on
-                      Discord. If everything looks good, you can end the
-                      tutorial!
-                    </text>
-                  </>
-                )}
               </ModalBody>
               <ModalFooter>
                 <Button
