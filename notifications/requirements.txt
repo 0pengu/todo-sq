@@ -1,0 +1,6 @@
+discord
+asyncio
+schedule
+supabase
+sentry-sdk
+python-dotenv

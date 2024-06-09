@@ -1,0 +1,9 @@
+/* @import url("@radix-ui/themes/styles.css"); */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-black text-white;
+}

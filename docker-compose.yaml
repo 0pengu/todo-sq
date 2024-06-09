@@ -1,0 +1,17 @@
+version: '4.2'
+
+services:
+  app:
+    build: .
+    command: python run.py
+    environment:
+      - URL
+      - PY_DSN
+      - NEXT_PUBLIC_SUPABASE_URL
+      - SUPABASE_SERVICE_KEY
+      - DISCORD_BOT_TOKEN
+    env_file:
+      - path: ./.env.production
+        required: false
+    restart:
+      unless-stopped
