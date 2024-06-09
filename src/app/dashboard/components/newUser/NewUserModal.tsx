@@ -49,7 +49,10 @@ export default function NewUserModal({}: {}) {
   useEffect(() => {
     if (disabledForNow === false) {
       toast.success(
-        "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial."
+        "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial.",
+        {
+          duration: 8000,
+        }
       );
     }
   }, [disabledForNow]);
