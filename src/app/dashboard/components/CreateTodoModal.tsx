@@ -72,7 +72,7 @@ export default function CreateTodoModal({
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" type="submit">
+                <Button color="primary" type="submit" onPress={onClose}>
                   Submit
                 </Button>
               </ModalFooter>
