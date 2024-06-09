@@ -32,6 +32,7 @@ import toast from "react-hot-toast";
 
 export default function NewUserModal({}: {}) {
   const { isOpen, onOpenChange, onOpen } = useDisclosure();
+  const [count, setCount] = useState(0);
   const [disabledForNow, setDisabledForNow] = useState(true);
   const firstTodo = {
     id: "abcdef-12345-ghijkl",
@@ -47,15 +48,13 @@ export default function NewUserModal({}: {}) {
   const [open, setOpen] = useState(true);
 
   useEffect(() => {
-    if (disabledForNow === false) {
-      toast.success(
-        "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial.",
-        {
-          duration: 8000,
-        }
-      );
-    }
-  }, [disabledForNow]);
+    toast.success(
+      "Todo sent! Check your Discord DMs! If everything looks good, you can end the tutorial.",
+      {
+        duration: 8000,
+      }
+    );
+  }, [count]);
 
   return (
     <Modal
@@ -137,7 +136,10 @@ export default function NewUserModal({}: {}) {
                 <Button
                   color="primary"
                   type="submit"
-                  onPress={() => setDisabledForNow(false)}
+                  onPress={() => {
+                    setCount(count + 1);
+                    setDisabledForNow(false);
+                  }}
                 >
                   Send Todo
                 </Button>
