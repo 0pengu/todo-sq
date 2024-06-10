@@ -175,7 +175,8 @@ export default function Dashboard({
                           : "Due " +
                             formatFutureTime(
                               moment(todo.due_date).local().toLocaleString()
-                            )}
+                            ) +
+                            (todo.completed ? " (Completed)" : "")}
                       </p>
                     </Tooltip>
                     <p className="text-small text-default-500">
