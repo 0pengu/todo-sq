@@ -1,4 +1,8 @@
-import { parseAbsoluteToLocal } from "@internationalized/date";
+import {
+  getLocalTimeZone,
+  now,
+  parseAbsoluteToLocal,
+} from "@internationalized/date";
 import {
   Modal,
   ModalContent,
@@ -12,6 +16,7 @@ import {
 import moment from "moment";
 import { editTodo } from "../../actions";
 import { Todo } from "../../utils/types";
+import { useState } from "react";
 
 export default function EditModal({
   isOpen,
@@ -25,6 +30,8 @@ export default function EditModal({
   const handleClose = () => {
     onOpenChange(false);
   };
+
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="center">
@@ -56,7 +63,17 @@ export default function EditModal({
                   defaultValue={parseAbsoluteToLocal(
                     moment(selectedTodo?.due_date).utc().toISOString()
                   )}
+                  onChange={(value) => {
+                    if (value.compare(now(getLocalTimeZone())) < 0) {
+                      setError(
+                        "Due date is not in the future! This message will be sent immediately. If this is intended, proceed."
+                      );
+                    } else {
+                      setError(null);
+                    }
+                  }}
                 />
+                {error && <div className="text-danger text-sm">{error}</div>}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={handleClose}>

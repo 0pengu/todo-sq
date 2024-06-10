@@ -166,10 +166,16 @@ export default function Dashboard({
                         .format("MM/DD/YYYY h:mm a z")}
                     >
                       <p className="text-small text-default-500">
-                        Due{" "}
-                        {formatFutureTime(
-                          moment(todo.due_date).local().toLocaleString()
-                        )}
+                        {moment().diff(todo.due_date) > 0
+                          ? "Due " +
+                            formatTime(
+                              moment(todo.due_date).local().toLocaleString()
+                            ) +
+                            (todo.completed ? " (Completed)" : " (Overdue)")
+                          : "Due " +
+                            formatFutureTime(
+                              moment(todo.due_date).local().toLocaleString()
+                            )}
                       </p>
                     </Tooltip>
                     <p className="text-small text-default-500">
