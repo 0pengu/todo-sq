@@ -56,6 +56,7 @@ async def query_and_send_messages():
     # Query the database for todos
     response = supabase.table("todos").select(
         "*").eq("sent", False).eq("completed", False).lte("due_date", now).execute()
+    print(response)
     todos = response.data
 
     for todo in todos:
