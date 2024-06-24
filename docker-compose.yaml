@@ -12,6 +12,5 @@ services:
       - DISCORD_BOT_TOKEN
     env_file:
       - path: ./.env.production
-        required: false
     restart:
       unless-stopped

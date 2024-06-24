@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ./notifications/. /app
 
+# COPY ./.env.production /app/.env.production
+
 RUN echo "def mode():" > /app/EDITME.py
 RUN echo "    return \"prod\"" >> /app/EDITME.py
 
