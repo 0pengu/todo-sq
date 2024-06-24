@@ -3,7 +3,7 @@ version: '4.2'
 services:
   app:
     build: .
-    command: python run.py
+    command: python -u run.py
     environment:
       - URL
       - PY_DSN
